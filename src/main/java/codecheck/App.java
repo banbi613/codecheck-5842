@@ -25,27 +25,26 @@ public class App {
 
 			// 3のつく数 判定
 			String[] strs = str.split("");
-			for (String x : strs) {
-				if (x.equals("3")) {
+			for (String n : strs) {
+				if (n.equals("3")) {
 					three = true;
 					break;
 				}
 			}
 
+			// 3の倍数かつ3のつく数
+			if(mult && three)
+				return "dumb";
 			// 3の倍数
-			if (mult) {
-				// かつ3のつく数
-				if (three)
-					return "dumb";
-				else
-					return "idiot";
-			}
+			else if (mult)
+				return "idiot";
 			// 3のつく数
 			else if (three)
 				return "stupid";
 			// その他
 			else
 				return "smart";
+			
 		} catch (NumberFormatException nfex) {
 			// 数値以外の値の入力
 			return "invalid";
