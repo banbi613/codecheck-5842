@@ -3,39 +3,52 @@ package codecheck;
 public class App {
 	public static void main(String[] args) {
 		for (int i = 0, l = args.length; i < l; i++) {
-			System.out.println(baka(args[i]));
+			// 入力を空白で分割
+			String[] strs = args[i].split(" ");
+			for(String str: strs) {
+				System.out.println(baka(str));
+			}
 		}
 	}
 
-    String baka(String str) {
-      boolean multiple = false;
-      boolean three = false;
+	static String baka(String str) {
+		boolean mult = false; // 3の倍数
+		boolean three = false; // 3のつく数
 
-      try {
-        int num = Integer.parseInt(str);
-        if ((num % 3) == 0)
-          multiple = true;
-        
-        String[] strs = str.split("");
-        for(String x: strs) {
-          if(x.equals("3")) {
-            three = true;
-            break;
-          }
-        }
-        
-        if(multiple = true) {
-          if(three = true)
-            return "dumb";
-          else
-            return "idiot";
-        }
-        else if(three = true)
-          return "stupid";
-        else
-          return "smart";
-      } catch(NumberFormatException nfex) {
-        return "invalid";
-      }
-    }
+		try {
+			// 入力文字列を数値に変換
+			int num = Integer.parseInt(str);
+
+			// 3の倍数 判定
+			if ((num % 3) == 0)
+				mult = true;
+
+			// 3のつく数 判定
+			String[] strs = str.split("");
+			for (String x : strs) {
+				if (x.equals("3")) {
+					three = true;
+					break;
+				}
+			}
+
+			// 3の倍数
+			if (mult) {
+				// かつ3のつく数
+				if (three)
+					return "dumb";
+				else
+					return "idiot";
+			}
+			// 3のつく数
+			else if (three)
+				return "stupid";
+			// その他
+			else
+				return "smart";
+		} catch (NumberFormatException nfex) {
+			// 数値以外の値の入力
+			return "invalid";
+		}
+	}
 }
